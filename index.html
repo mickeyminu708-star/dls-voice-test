@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DLS Voice Innovation</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 20px;
+  background: #101827;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.container { max-width: 520px; margin: auto; }
+h1 { text-align: center; color: #54e0b0; }
+.subtitle { text-align: center; color: #b8c5d6; }
+.card {
+  background: #1d2a3d;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 18px;
+}
+label { display: block; margin-bottom: 10px; }
+select, textarea, button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+select, textarea { background: #f4f7fb; color: #142033; }
+textarea { min-height: 150px; margin-top: 14px; }
+button { margin-top: 12px; font-weight: bold; }
+#start { background: #20c997; color: #08251d; }
+#stop { background: #ffbd59; color: #30200a; }
+#clear { background: #52647d; color: white; }
+#send { background: #4d8dff; color: white; }
+.status { text-align: center; padding: 12px; color: #54e0b0; }
+.receiver {
+  border: 1px solid #54e0b0;
+  min-height: 80px;
+  padding: 14px;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+.note { color: #b8c5d6; font-size: 13px; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>DLS Voice Innovation</h1>
+  <p class="subtitle">Speak Naturally. Get Your Words in Text.</p>
+
+  <div class="card">
+    <label for="language">Choose your speaking language</label>
+    <select id="language">
+      <option value="hi-IN">हिंदी</option>
+      <option value="en-IN">English (India)</option>
+      <option value="mr-IN">मराठी</option>
+      <option value="gu-IN">ગુજરાતી</option>
+      <option value="bn-IN">বাংলা</option>
+      <option value="ta-IN">தமிழ்</option>
+      <option value="te-IN">తెలుగు</option>
+      <option value="pa-IN">ਪੰਜਾਬੀ</option>
+      <option value="ur-IN">اردو</option>
+      <option value="kn-IN">ಕನ್ನಡ</option>
+      <option value="ml-IN">മലയാളം</option>
+    </select>
+
+    <button id="start">🎙️ START SPEAKING</button>
+    <button id="stop">STOP</button>
+    <div class="status" id="status">Ready to listen</div>
+
+    <label for="message">Your voice converted into text</label>
+    <textarea id="message" placeholder="Your spoken words will appear here..."></textarea>
+
+    <button id="clear">CLEAR TEXT</button>
+    <button id="send">SEND DEMO MESSAGE</button>
+  </div>
+
+  <div class="card">
+    <h3>Receiver Screen – Demo</h3>
+    <div class="receiver" id="received">
+      Your message will appear here after pressing Send Demo.
+    </div>
+    <p class="note">
+      This is a local demo. It displays the message on this same device;
+      it does not send a real message to another phone.
+    </p>
+  </div>
+
+  <p class="note">
+    DLS Voice Innovation – Experimental Version 1.<br>
+    Browser and language support may vary. Internet may be required.
+  </p>
+</div>
+
+<script>
+const language = document.getElementById("language");
+const message = document.getElementById("message");
+const statusText = document.getElementById("status");
+const received = document.getElementById("received");
+
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+let recognition = null;
+let listening = false;
+
+if (!SpeechRecognition) {
+  statusText.textContent =
+    "Speech recognition is not supported. Try updated Chrome.";
+  document.getElementById("start").disabled = true;
+}
+
+document.getElementById("start").addEventListener("click", () => {
+  if (!SpeechRecognition) return;
+
+  try {
+    if (recognition) {
+      recognition.onend = null;
+      recognition.stop();
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = language.value;
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onstart = () => {
+      listening = true;
+      statusText.textContent = "Listening... Speak now";
+    };
+
+    recognition.onresult = (event) => {
+      let finalText = "";
+      let interimText = "";
+
+      for (let i = 0; i < event.results.length; i++) {
+        const transcript = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalText += transcript + " ";
+        } else {
+          interimText += transcript;
+        }
+      }
+
+      if (finalText) message.value += finalText;
+
+      statusText.textContent = interimText
+        ? "Hearing: " + interimText
+        : "Voice converted to text";
+    };
+
+    recognition.onerror = (event) => {
+      statusText.textContent = "Error: " + event.error;
+    };
+
+    recognition.onend = () => {
+      listening = false;
+      statusText.textContent = "Stopped. Ready again.";
+    };
+
+    recognition.start();
+  } catch (error) {
+    statusText.textContent = "Could not start: " + error.message;
+  }
+});
+
+document.getElementById("stop").addEventListener("click", () => {
+  if (recognition && listening) recognition.stop();
+});
+
+document.getElementById("clear").addEventListener("click", () => {
+  message.value = "";
+  statusText.textContent = "Text cleared";
+});
+
+document.getElementById("send").addEventListener("click", () => {
+  received.textContent = message.value.trim() ||
+    "Please speak or type a message first.";
+});
+</script>
+</body>
+</html>
