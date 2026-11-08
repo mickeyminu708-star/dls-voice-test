@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inbox | T2MF</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">T</span>
+      <span>T2MF<small>CREATOR DLS</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="create.html">Create</a>
+      <a class="active" href="inbox.html">Inbox</a>
+      <a href="profile.html">My Identity</a>
+    </nav>
+  </header>
+
+  <main class="container page-container">
+    <div class="page-heading">
+      <span class="eyebrow">YOUR PERSONAL SPACE</span>
+      <h1>Message Inbox</h1>
+      <p>Messages designed to carry more than just words.</p>
+    </div>
+
+    <section class="inbox-toolbar">
+      <div>
+        <h2>Received messages</h2>
+        <p>2 sample messages in this prototype</p>
+      </div>
+      <a class="btn primary" href="create.html">＋ New Message</a>
+    </section>
+
+    <section class="message-list">
+      <article class="message-card">
+        <div class="sender-avatar">A</div>
+        <div class="message-content">
+          <div class="message-top">
+            <h3>Alex Morgan</h3>
+            <span class="message-time">10:30 AM</span>
+          </div>
+          <span class="message-tag">😊 Happy · Face + Voice</span>
+          <p>Hope you have a wonderful day! Just wanted to send you a little happiness.</p>
+          <div class="message-actions">
+            <button class="btn primary demo-open">Open Message →</button>
+            <button class="btn secondary demo-reply">Reply</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="message-card">
+        <div class="sender-avatar avatar-two">S</div>
+        <div class="message-content">
+          <div class="message-top">
+            <h3>Sarah Williams</h3>
+            <span class="message-time">Yesterday</span>
+          </div>
+          <span class="message-tag">❤️ Loving · Voice + Text</span>
+          <p>Thank you for always being there. Your support means a lot to me.</p>
+          <div class="message-actions">
+            <button class="btn primary demo-open">Open Message →</button>
+            <button class="btn secondary demo-reply">Reply</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="empty-note">
+      <span>🔒</span>
+      <h3>Your messages, your control</h3>
+      <p>This is a sample inbox. Real accounts, private delivery and message storage are not connected yet.</p>
+    </section>
+
+    <footer class="footer">
+      <div class="brand footer-brand">
+        <span class="brand-mark">T</span>
+        <span>T2MF<small>CREATOR DLS</small></span>
+      </div>
+      <p>© 2026 T2MF · Creator DLS</p>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
