@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Message | T2MF</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="brand-mark">T</span>
+      <span>T2MF<small>CREATOR DLS</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <nav id="mainNav">
+      <a href="index.html">Home</a>
+      <a class="active" href="create.html">Create</a>
+      <a href="inbox.html">Inbox</a>
+      <a href="profile.html">My Identity</a>
+    </nav>
+  </header>
+
+  <main class="container page-container">
+    <div class="page-heading">
+      <span class="eyebrow">T2MF MESSAGE STUDIO</span>
+      <h1>Create your message</h1>
+      <p>Write your words and choose how they should be expressed.</p>
+    </div>
+
+    <div class="create-layout">
+      <section class="panel">
+        <label for="messageText">Your message</label>
+        <textarea id="messageText" maxlength="500"
+          placeholder="Write something you want to express..."></textarea>
+        <div class="field-hint"><span id="charCount">0</span>/500 characters</div>
+
+        <label for="language">Message language</label>
+        <select id="language">
+          <option>English</option>
+          <option>Hindi</option>
+          <option>Hinglish</option>
+          <option>Bengali</option>
+          <option>Marathi</option>
+          <option>Tamil</option>
+          <option>Telugu</option>
+        </select>
+
+        <label>Choose an emotion</label>
+        <div class="emotion-grid">
+          <button class="emotion active" data-emotion="Happy">😊 Happy</button>
+          <button class="emotion" data-emotion="Calm">😌 Calm</button>
+          <button class="emotion" data-emotion="Sad">😢 Sad</button>
+          <button class="emotion" data-emotion="Playful">😄 Playful</button>
+          <button class="emotion" data-emotion="Serious">🙂 Serious</button>
+          <button class="emotion" data-emotion="Loving">❤️ Loving</button>
+        </div>
+
+        <label>Receiver experience</label>
+        <div class="mode-options">
+          <label class="mode-option">
+            <input type="radio" name="mode" value="Face + Voice" checked>
+            <span><strong>Face + Voice</strong><small>Personal face and voice experience</small></span>
+          </label>
+          <label class="mode-option">
+            <input type="radio" name="mode" value="Voice + Text">
+            <span><strong>Voice + Text</strong><small>Spoken message with readable text</small></span>
+          </label>
+        </div>
+
+        <label class="consent-check">
+          <input type="checkbox" id="consent">
+          <span>I will use only my own identity or an identity whose owner has explicitly consented.</span>
+        </label>
+
+        <button class="btn primary full-btn" id="previewBtn">Preview Message →</button>
+        <p class="demo-note">Demo only: this page does not generate real voice/video or deliver messages.</p>
+      </section>
+
+      <aside class="preview-panel">
+        <span class="eyebrow">LIVE PREVIEW</span>
+        <div class="preview-face">☺</div>
+        <h2 id="previewEmotion">Happy expression</h2>
+        <div class="preview-message" id="previewMessage">
+          Your message preview will appear here.
+        </div>
+        <div class="preview-details">
+          <span id="previewLanguage">English</span>
+          <span id="previewMode">Face + Voice</span>
+        </div>
+        <p class="demo-note">Illustrative preview — no AI generation is connected.</p>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      <div class="brand footer-brand">
+        <span class="brand-mark">T</span>
+        <span>T2MF<small>CREATOR DLS</small></span>
+      </div>
+      <p>© 2026 T2MF · Creator DLS</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
